@@ -231,7 +231,8 @@ public class BitmapCache {
                 throw new IllegalArgumentException("setMemCacheSizePercent - percent must be "
                         + "between 0.05 and 0.8 (inclusive)");
             }
-            memCacheSize = Math.round(percent * getMemoryClass(context) * 1024 * 1024);
+            //memCacheSize = Math.round(percent * getMemoryClass(context) * 1024 * 1024);//原代码
+            memCacheSize = Math.round(percent * getMemoryClass(context) );//getMemoryClass(context)返回的单位是MB，不需要再*1024*1024
         }
         
         
