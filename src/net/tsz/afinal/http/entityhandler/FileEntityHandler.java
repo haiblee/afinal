@@ -66,6 +66,9 @@ public class FileEntityHandler {
 		}
 		
 		if(mStop){
+			if (os != null) {
+            			os.close();
+        		}
 			return targetFile;
 		}
 			
@@ -73,6 +76,9 @@ public class FileEntityHandler {
 		long count = entity.getContentLength() + current;
 		
 		if(current >= count || mStop){
+			if (os != null) {
+            			os.close();
+        		}
 			return targetFile;
 		}
 		
@@ -86,9 +92,14 @@ public class FileEntityHandler {
 		callback.callBack(count, current,true);
 		
 		if(mStop && current < count){ //用户主动停止
+			if (os != null) {
+		    		os.close();
+			}
 			throw new IOException("user stop download thread");
 		}
-		
+		if (os != null) {
+            		os.close();
+        	}
 		return targetFile;
 	}
 
